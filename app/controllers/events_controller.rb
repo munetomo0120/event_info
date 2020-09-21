@@ -1,4 +1,10 @@
 class EventsController < ApplicationController
+  skip_before_action :authenticate, only: :show
+
+  def index
+    @events = Event.where("start_at > ?", Time.zone.now).order(:start_at)
+  end
+
   def new
     @event = current_user.created_events.build
   end
@@ -9,6 +15,10 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to @event, notice: "作成しました"
     end
+  end
+
+  def show
+    @event = Event.find(params[:id])
   end
 
   private
