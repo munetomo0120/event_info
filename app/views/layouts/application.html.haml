@@ -2,6 +2,7 @@
 %html
   %head
     %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
     %title EventInfo
     = csrf_meta_tags
     = csp_meta_tag
@@ -12,6 +13,8 @@
       .container
         = link_to "EventInfo", root_path, class: "navbar-brand mr-auto"
         %ul.navbar-nav
+          %li.nav-item
+            = link_to "イベント作成", new_event_path, class: "nav-link"
           - if logged_in?
             %li.nav-item
               = link_to "ログアウト", logout_path, class: "nav-link", method: :delete
@@ -22,4 +25,7 @@
       - if flash.notice
         .alert.alert-success
           = flash.notice
+      - if flash.alert
+        .alert.alert-danger
+          = flash.alert
       = yield
