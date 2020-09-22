@@ -1,4 +1,4 @@
-%h1 イベント一覧
+%h1.mt-4.mb-4 イベント一覧
 
 %ul.list-group
   - @events.each do |event|
@@ -6,4 +6,6 @@
       %h5.list-group-item-heading= event.name
       %p.mb-1= "#{l(event.start_at, format: :long)} - #{l(event.end_at, format: :long)}"
 
+.mt-2.mb-2
+  = page_entries_info @events
 = paginate @events
