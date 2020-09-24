@@ -1,8 +1,13 @@
+-# #loader-bg
+-#   #loader
+-#     = image_pack_tag 'loading.gif'
+
+
 %h1.mt-4.mb-4 イベント一覧
 
 = search_form_for(@q, url: root_path) do |f|
   .form-group
-    = f.label :name, "Keyword"
+    = f.label :name, "キーワード"
     = f.text_field :name_or_place_or_content_cont, class: "form-control"
   .form-group
     = f.label :start_at, "以降に開催されるイベント"
@@ -15,6 +20,7 @@
     = link_to(event, class: "list-group-item list-group-item-action") do
       %h5.list-group-item-heading= event.name
       %p.mb-1= "#{l(event.start_at, format: :long)} - #{l(event.end_at, format: :long)}"
+      %p.mb-1= "参加者数: #{event.ticket_ids.length}"
 
 .mt-2.mb-2
   = page_entries_info @events
